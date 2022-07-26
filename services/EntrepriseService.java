@@ -36,16 +36,17 @@ public class EntrepriseService implements IService<Entreprise> {
 	}
 
 	@Override
-	public Integer delete(Integer id) {
+	public Long delete(Long id) {
+		entrepriseRepository.deleteById(id);
+		return id;
+	}
+	@Override
+	public Optional<List<Entreprise>> findByNom(String nom) {
 		// TODO Auto-generated method stub
-		return null;
+		return entrepriseRepository.findByRaisonSociale(nom);
 	}
 
-	@Override
-	public Optional<List<Entreprise>> findByNomAndPrenom(String nom, String prenom) {
-		// TODO Auto-generated method stub
-		return Optional.empty();
-	}
+	
 	
 	
 

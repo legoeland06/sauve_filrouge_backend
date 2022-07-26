@@ -34,16 +34,17 @@ public class CommandeService implements IService<Commande> {
 	}
 
 	@Override
-	public Integer delete(Integer id) {
-		// TODO Auto-generated method stub
-		return null;
+	public Long delete(Long id) {
+		commandeRepository.deleteById(id);
+		return id;
 	}
 
 	@Override
-	public Optional<List<Commande>> findByNomAndPrenom(String nom, String prenom) {
+	public Optional<List<Commande>> findByNom(String nom) {
 		// TODO Auto-generated method stub
 		return Optional.empty();
 	}
 
+	
 
 }

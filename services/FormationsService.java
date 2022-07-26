@@ -36,16 +36,16 @@ public class FormationsService implements IService<Formation> {
 	}
 
 	@Override
-	public Integer delete(Integer id) {
+	public Long delete(Long id) {
+		formationRepository.deleteById(id);
+		return id;
+	}
+	@Override
+	public Optional<List<Formation>> findByNom(String nom) {
 		// TODO Auto-generated method stub
-		return null;
+		return formationRepository.findByIntitule(nom);
 	}
 
-	@Override
-	public Optional<List<Formation>> findByNomAndPrenom(String nom, String prenom) {
-		// TODO Auto-generated method stub
-		return Optional.empty();
-	}
 	
 	
 

@@ -2,7 +2,6 @@ package com.example.demo.entities;
 
 import java.util.Date;
 
-
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,24 +9,26 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="commande")
-public class Commande{
+@Table(name = "commande")
+public class Commande {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@SequenceGenerator(name = "id_Sequence", sequenceName = "COMMANDE_ID_FK")
 	private Long id;
 
 	@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.ALL })
 	@JoinColumn(name = "internaute_id", referencedColumnName = "id", nullable = true)
 	private Internaute internaute;
-	
+
 	private Date dateValidation;
-	
+
 	private double solde;
-	
+
 	public Commande() {
 		super();
 	}
@@ -77,6 +78,4 @@ public class Commande{
 				+ solde + "]";
 	}
 
-	
-	
 }

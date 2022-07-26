@@ -9,13 +9,12 @@ import com.example.demo.entities.Internaute;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-@Service(value="internauteService")
+@Service(value = "internauteService")
 public class InternauteService implements IService<Internaute> {
 
 	@Autowired
 	private InternauteRepository internauteRepository;
-	
-	
+
 	@Override
 	public List<Internaute> findAll() {
 		// TODO Auto-generated method stub
@@ -35,15 +34,16 @@ public class InternauteService implements IService<Internaute> {
 	}
 
 	@Override
-	public Integer delete(Integer id) {
-		// TODO Auto-generated method stub
-		return null;
+	public Long delete(Long id) {
+		internauteRepository.deleteById(id);
+		return id;
 	}
 
 	@Override
-	public Optional<List<Internaute>> findByNomAndPrenom(String nom, String prenom) {
+	public Optional<List<Internaute>> findByNom(String nom) {
 		// TODO Auto-generated method stub
-		return internauteRepository.findByNomAndPrenom(nom, prenom);
+		return internauteRepository.findByNom(nom);
 	}
 
+	
 }

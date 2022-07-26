@@ -13,8 +13,8 @@ public interface IService<T> {
 
 	Optional<T> findById(Long id);
 
-	Integer delete(Integer id);
+	Long delete(Long id);
 
-	Optional<List<T>> findByNomAndPrenom(String nom,String prenom);
+	Optional<List<T>> findByNom(String nom);
 
 }
