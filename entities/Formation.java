@@ -1,12 +1,14 @@
 package com.example.demo.entities;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
@@ -39,9 +41,12 @@ public class Formation {
 	
 	@OneToOne(cascade = { CascadeType.PERSIST, CascadeType.ALL })
 	private LienTest lienTest;
-
+	
+	@ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.ALL })
+	private List<Formateur> formateurs;
+	
 	public Formation(String intitule, String descriptif, int duree, Date dateDebut, double prix, Niveau niveau,
-			Adresse lieux, LienTest lienTest) {
+			Adresse lieux, LienTest lienTest,List<Formateur> formateurs) {
 		super();
 		this.intitule = intitule;
 		this.descriptif = descriptif;
@@ -51,6 +56,7 @@ public class Formation {
 		this.niveau = niveau;
 		this.lieux = lieux;
 		this.lienTest = lienTest;
+		this.formateurs = formateurs;
 	}
 
 	public Formation() {
@@ -129,11 +135,19 @@ public class Formation {
 		this.lienTest = lienTest;
 	}
 
+	public List<Formateur> getFormateurs() {
+		return formateurs;
+	}
+
+	public void setFormateurs(List<Formateur> formateurs) {
+		this.formateurs = formateurs;
+	}
+
 	@Override
 	public String toString() {
 		return "Formation [id=" + id + ", intitule=" + intitule + ", descriptif=" + descriptif + ", duree=" + duree
 				+ ", dateDebut=" + dateDebut + ", prix=" + prix + ", niveau=" + niveau + ", lieux=" + lieux
-				+ ", lienTest=" + lienTest + "]";
+				+ ", lienTest=" + lienTest + ", Formateurs= " + formateurs + "]";
 	}
 	
 

@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -34,13 +35,17 @@ public class Formateur {
 
 	@OneToMany(cascade = { CascadeType.PERSIST, CascadeType.ALL })
 	private List<Telephone> telephones;
+	
+	@ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.ALL })
+	private List<Categorie> categories;
 
-	public Formateur(String nom, String prenom, Email email, List<Telephone> telephones) {
+	public Formateur(String nom, String prenom, Email email, List<Telephone> telephones,List<Categorie> categories) {
 		super();
 		this.nom = nom;
 		this.prenom = prenom;
 		this.email = email;
 		this.telephones = telephones;
+		this.categories = categories;
 	}
 
 	public Formateur() {
@@ -86,11 +91,20 @@ public class Formateur {
 	public void setTelephone(List<Telephone> telephones) {
 		this.telephones = telephones;
 	}
+	
+
+	public List<Categorie> getCategories() {
+		return categories;
+	}
+
+	public void setCategories(List<Categorie> categories) {
+		this.categories = categories;
+	}
 
 	@Override
 	public String toString() {
 		return "Formateur [id=" + id + ", nom=" + nom + ", prenom=" + prenom + ", email=" + email + ", telephone="
-				+ telephones + "]";
+				+ telephones + ", Catégories "+ categories +"]";
 	}
 
 }
