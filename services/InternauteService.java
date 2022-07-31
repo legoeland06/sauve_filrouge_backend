@@ -13,36 +13,50 @@ import org.springframework.stereotype.Service;
 public class InternauteService implements IService<Internaute> {
 
 	@Autowired
-	private InternauteRepository internauteRepository;
+	private InternauteRepository itRepository;
 
 	@Override
 	public List<Internaute> findAll() {
 		// TODO Auto-generated method stub
-		return internauteRepository.findAll();
+		return itRepository.findAll();
 	}
 
 	@Override
 	public Internaute saveOrUpdate(Internaute o) {
 		// TODO Auto-generated method stub
-		return internauteRepository.save(o);
+		Internaute changedInternaute = new Internaute();
+		
+		changedInternaute.setNom(o.getNom());
+		changedInternaute.setPrenom(o.getPrenom());
+		changedInternaute.setEmail(o.getEmail());
+		changedInternaute.setPassword(o.getPassword());
+		
+		return itRepository.save(changedInternaute);
 	}
 
 	@Override
 	public Optional<Internaute> findById(Long id) {
 		// TODO Auto-generated method stub
-		return internauteRepository.findById(id);
+		return itRepository.findById(id);
 	}
 
 	@Override
-	public Long delete(Long id) {
-		internauteRepository.deleteById(id);
+	public Long deleteById(Long id) {
+		// TODO Auto-generated method stub
+		itRepository.deleteById(id);
 		return id;
 	}
 
 	@Override
-	public Optional<List<Internaute>> findByNom(String nom) {
+	public void delete(Internaute o) {
 		// TODO Auto-generated method stub
-		return internauteRepository.findByNom(nom);
+		itRepository.delete(o);
+	}
+
+	@Override
+	public List<Internaute> findByNomContains(String element) {
+		// TODO Auto-generated method stub
+		return itRepository.findByNomContains(element);
 	}
 
 	

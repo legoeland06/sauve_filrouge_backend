@@ -13,38 +13,48 @@ import org.springframework.stereotype.Service;
 public class CommandeService implements IService<Commande> {
 
 	@Autowired
-	private CommandeRepository commandeRepository;
+	private CommandeRepository cmdRepository;
 
 	@Override
 	public List<Commande> findAll() {
 		// TODO Auto-generated method stub
-		return commandeRepository.findAll();
+		return cmdRepository.findAll();
 	}
 
 	@Override
 	public Commande saveOrUpdate(Commande o) {
 		// TODO Auto-generated method stub
-		return commandeRepository.save(o);
+		Commande changedCommande = new Commande();
+		changedCommande.setFormation(o.getFormation());
+		changedCommande.setSolde(o.getSolde());
+		changedCommande.setDateValidation(o.getDateValidation());
+		return cmdRepository.save(changedCommande);
 	}
 
 	@Override
 	public Optional<Commande> findById(Long id) {
 		// TODO Auto-generated method stub
-		return Optional.empty();
+		return cmdRepository.findById(id);
 	}
 
 	@Override
-	public Long delete(Long id) {
-		commandeRepository.deleteById(id);
+	public Long deleteById(Long id) {
+		// TODO Auto-generated method stub
+		cmdRepository.deleteById(id);
 		return id;
 	}
 
 	@Override
-	public Optional<List<Commande>> findByNom(String nom) {
+	public void delete(Commande o) {
 		// TODO Auto-generated method stub
-		return Optional.empty();
+		cmdRepository.delete(o);
+	}
+
+	@Override
+	public List<Commande> findByNomContains(String element) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	
-
 }

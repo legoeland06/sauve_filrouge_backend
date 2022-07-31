@@ -12,8 +12,7 @@ import javax.persistence.Table;
 public class Adresse {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "id_Sequence")
-	@SequenceGenerator(name = "id_Sequence", sequenceName = "ADRESSE_ID_FK")
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	
 	private String rue;

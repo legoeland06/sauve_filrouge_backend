@@ -16,17 +16,29 @@ public class FormationsService implements IService<Formation> {
 	@Autowired
 	private FormationRepository formationRepository;
 
-	public Optional<List<Formation>> findByIntitule(@RequestParam String i){
-		return formationRepository.findByIntitule(i);
-	}
+	
 	@Override
 	public List<Formation> findAll() {
+		// TODO Auto-generated method stub
 		return formationRepository.findAll();
 	}
 
 	@Override
 	public Formation saveOrUpdate(Formation o) {
-		return formationRepository.save(o);
+		// TODO Auto-generated method stub
+		Formation changedFormation = new Formation();
+		
+		changedFormation.setIntitule(o.getIntitule());
+		changedFormation.setDescriptif(o.getDescriptif());
+		changedFormation.setDuree(o.getDuree());
+		changedFormation.setLienTest(o.getLienTest());
+		changedFormation.setLieux(o.getLieux());
+		changedFormation.setPrix(o.getPrix());
+		changedFormation.setNiveau(o.getNiveau());
+		changedFormation.setFormateurs(o.getFormateurs());
+		changedFormation.setDateDebut(o.getDateDebut());
+		
+		return formationRepository.save(changedFormation);
 	}
 
 	@Override
@@ -36,17 +48,22 @@ public class FormationsService implements IService<Formation> {
 	}
 
 	@Override
-	public Integer delete(Integer id) {
+	public Long deleteById(Long id) {
 		// TODO Auto-generated method stub
-		return null;
+		formationRepository.deleteById(id);
+		return id;
 	}
 
 	@Override
-	public Optional<List<Formation>> findByNomAndPrenom(String nom, String prenom) {
+	public void delete(Formation o) {
 		// TODO Auto-generated method stub
-		return Optional.empty();
+		formationRepository.delete(o);
+	}
+
+	@Override
+	public List<Formation> findByNomContains(String element) {
+		// TODO Auto-generated method stub
+		return formationRepository.findByIntituleContains(element);
 	}
 	
-	
-
 }

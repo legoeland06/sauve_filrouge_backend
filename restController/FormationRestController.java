@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Optional;
 
 import com.example.demo.entities.Formation;
-import com.example.demo.entities.Formation;
 import com.example.demo.services.IService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,6 +51,10 @@ public class FormationRestController {
 		return formationService.findById(id);
 	}
 	
+	@GetMapping("/formations/findByIntitule/{intitule}")
+	public Optional<List<Formation>> findByNom(@PathVariable String intitule) {
+		return Optional.of(formationService.findByNomContains(intitule));
+	}
 	
 	@PostMapping("/formations")
 	public ResponseEntity<Formation> save(@RequestBody Formation i) {
@@ -61,7 +64,7 @@ public class FormationRestController {
 	@DeleteMapping("/formations/{id}")
 	public ResponseEntity<Long> save(@PathVariable Long id) {
 		
-		return new ResponseEntity<Long>(formationService.delete(id), HttpStatus.OK);
+		return new ResponseEntity<Long>(formationService.deleteById(id), HttpStatus.OK);
 	}
 
 }

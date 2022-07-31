@@ -3,27 +3,38 @@ package com.example.demo.entities;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
+import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="entreprise")
-public class Entreprise {
+@DiscriminatorValue(value="ENTRP")
+public class Entreprise extends Client {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "id_Sequence")
-	@SequenceGenerator(name = "id_Sequence", sequenceName = "ENTREPRISE_ID_FK")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
 	private String raisonSociale;
 	
+	private String contactEntrepriseNom;
+	
+	private String contactEntreprisePrenom;
+	
 	@OneToMany(cascade = { CascadeType.PERSIST, CascadeType.ALL })
-	private List<Email> emails; // est ce que String est une entite @Entity ?
+	private List<Email> emails;
 
 	@OneToMany(cascade = { CascadeType.PERSIST, CascadeType.ALL })
 	private List<Adresse> adresses;
@@ -33,14 +44,6 @@ public class Entreprise {
 
 	public Entreprise() {
 		super();
-	}
-
-	public Entreprise(String raisonSociale, List<Email> emails, List<Adresse> adresses, List<Telephone> telephones) {
-		super();
-		this.raisonSociale = raisonSociale;
-		this.emails = emails;
-		this.adresses = adresses;
-		this.telephones = telephones;
 	}
 
 	public Long getId() {
@@ -57,6 +60,22 @@ public class Entreprise {
 
 	public void setRaisonSociale(String raisonSociale) {
 		this.raisonSociale = raisonSociale;
+	}
+
+	public String getContactEntrepriseNom() {
+		return contactEntrepriseNom;
+	}
+
+	public void setContactEntrepriseNom(String contactEntrepriseNom) {
+		this.contactEntrepriseNom = contactEntrepriseNom;
+	}
+
+	public String getContactEntreprisePrenom() {
+		return contactEntreprisePrenom;
+	}
+
+	public void setContactEntreprisePrenom(String contactEntreprisePrenom) {
+		this.contactEntreprisePrenom = contactEntreprisePrenom;
 	}
 
 	public List<Email> getEmails() {
@@ -81,12 +100,6 @@ public class Entreprise {
 
 	public void setTelephones(List<Telephone> telephones) {
 		this.telephones = telephones;
-	}
-
-	@Override
-	public String toString() {
-		return "Entreprise [raisonSociale=" + raisonSociale + ", emails=" + emails + ", adresses=" + adresses
-				+ ", telephones=" + telephones + "]";
 	}
 
 	

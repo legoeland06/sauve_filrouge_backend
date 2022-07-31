@@ -16,17 +16,21 @@ public class EntrepriseService implements IService<Entreprise> {
 	@Autowired
 	private EntrepriseRepository entrepriseRepository;
 
-	public Optional<List<Entreprise>> findByIntitule(@RequestParam String i){
-		return entrepriseRepository.findByRaisonSociale(i);
-	}
 	@Override
 	public List<Entreprise> findAll() {
+		// TODO Auto-generated method stub
 		return entrepriseRepository.findAll();
 	}
 
 	@Override
 	public Entreprise saveOrUpdate(Entreprise o) {
-		return entrepriseRepository.save(o);
+		Entreprise changedEnterprise = new Entreprise();
+		changedEnterprise.setRaisonSociale(o.getRaisonSociale());
+		changedEnterprise.setContactEntrepriseNom(o.getContactEntrepriseNom());
+		changedEnterprise.setContactEntreprisePrenom(o.getContactEntreprisePrenom());
+		changedEnterprise.setPassword(o.getPassword());
+		
+		return entrepriseRepository.save(changedEnterprise);
 	}
 
 	@Override
@@ -36,17 +40,21 @@ public class EntrepriseService implements IService<Entreprise> {
 	}
 
 	@Override
-	public Integer delete(Integer id) {
+	public Long deleteById(Long id) {
 		// TODO Auto-generated method stub
-		return null;
+		entrepriseRepository.deleteById(id);
+		return id;
 	}
 
 	@Override
-	public Optional<List<Entreprise>> findByNomAndPrenom(String nom, String prenom) {
+	public void delete(Entreprise o) {
 		// TODO Auto-generated method stub
-		return Optional.empty();
+		entrepriseRepository.delete(o);
 	}
-	
-	
 
+	@Override
+	public List<Entreprise> findByNomContains(String element) {
+		// TODO Auto-generated method stub
+		return entrepriseRepository.findByRaisonSocialeContains(element);
+	}
 }

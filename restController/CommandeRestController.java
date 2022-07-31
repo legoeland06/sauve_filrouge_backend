@@ -58,7 +58,7 @@ public class CommandeRestController {
 	@DeleteMapping("/commandes/{id}")
 	public ResponseEntity<Long> save(@PathVariable Long id) {
 		
-		return new ResponseEntity<Long>(commandeService.delete(id), HttpStatus.OK);
+		return new ResponseEntity<Long>(commandeService.deleteById(id), HttpStatus.OK);
 	}
 
 	

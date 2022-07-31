@@ -11,6 +11,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
 
 @Entity
 @Table(name = "commande")
@@ -18,26 +23,21 @@ public class Commande {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@SequenceGenerator(name = "id_Sequence", sequenceName = "COMMANDE_ID_FK")
 	private Long id;
-
+	
+	// c'est le client qui créer la commande
+	
 	@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.ALL })
-	@JoinColumn(name = "internaute_id", referencedColumnName = "id", nullable = true)
-	private Internaute internaute;
+	@JoinColumn(name="formation")
+	private Formation formation;
 
+	@Temporal(TemporalType.DATE)
 	private Date dateValidation;
 
-	private double solde;
+	private Double solde;
 
 	public Commande() {
 		super();
-	}
-
-	public Commande(Internaute internaute, Date dateValidation, double solde) {
-		super();
-		this.internaute = internaute;
-		this.dateValidation = dateValidation;
-		this.solde = solde;
 	}
 
 	public Long getId() {
@@ -48,12 +48,12 @@ public class Commande {
 		this.id = id;
 	}
 
-	public Internaute getInternaute() {
-		return internaute;
+	public Formation getFormation() {
+		return formation;
 	}
 
-	public void setInternaute(Internaute internaute) {
-		this.internaute = internaute;
+	public void setFormation(Formation formation) {
+		this.formation = formation;
 	}
 
 	public Date getDateValidation() {
@@ -64,18 +64,20 @@ public class Commande {
 		this.dateValidation = dateValidation;
 	}
 
-	public double getSolde() {
+	public Double getSolde() {
 		return solde;
 	}
 
-	public void setSolde(double solde) {
+	public void setSolde(Double solde) {
 		this.solde = solde;
 	}
 
 	@Override
 	public String toString() {
-		return "Commande [id=" + id + ", internaute=" + internaute + ", dateValidation=" + dateValidation + ", solde="
+		return "Commande [id=" + id + ", formation=" + formation + ", dateValidation=" + dateValidation + ", solde="
 				+ solde + "]";
 	}
+
+	
 
 }

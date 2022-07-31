@@ -12,8 +12,7 @@ import javax.persistence.Table;
 public class Email {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "id_Sequence")
-	@SequenceGenerator(name = "id_Sequence", sequenceName = "EMAIL_ID_FK")
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	
 	private String email;
@@ -45,7 +44,8 @@ public class Email {
 
 	@Override
 	public String toString() {
-		return "Email [id=" + id + ", email=" + email + "]";
+		// TODO: penser à voir si l'id dans le toString() est nécessaire
+		return "Email [email=" + email + "]";
 	}
 	
 	

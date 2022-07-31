@@ -3,6 +3,7 @@ package com.example.demo.services;
 import java.util.List;
 import java.util.Optional;
 
+import com.example.demo.entities.Commande;
 import com.example.demo.entities.Internaute;
 
 public interface IService<T> {
@@ -13,8 +14,10 @@ public interface IService<T> {
 
 	Optional<T> findById(Long id);
 
-	Long delete(Long id);
-
-	Optional<List<T>> findByNom(String nom);
-
+	Long deleteById(Long id);
+	
+	void delete(T o);
+	
+	List<T> findByNomContains(String element);
+	
 }

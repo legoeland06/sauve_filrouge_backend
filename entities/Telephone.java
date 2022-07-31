@@ -7,13 +7,14 @@ import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import org.springframework.lang.Nullable;
+
 @Entity
 @Table(name="telephone")
 public class Telephone {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "id_Sequence")
-	@SequenceGenerator(name = "id_Sequence", sequenceName = "TELEPHONE_ID_FK")
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	
 	private String numero;

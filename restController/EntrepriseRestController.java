@@ -60,7 +60,7 @@ public class EntrepriseRestController {
 	@DeleteMapping("/entreprises/{id}")
 	public ResponseEntity<Long> save(@PathVariable Long id) {
 		
-		return new ResponseEntity<Long>(entrepriseService.delete(id), HttpStatus.OK);
+		return new ResponseEntity<Long>(entrepriseService.deleteById(id), HttpStatus.OK);
 	}
 
 }

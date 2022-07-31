@@ -3,6 +3,8 @@ package com.example.demo.restController;
 import java.util.List;
 import java.util.Optional;
 
+import javax.swing.text.html.Option;
+
 import com.example.demo.entities.Internaute;
 import com.example.demo.services.IService;
 
@@ -19,6 +21,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
+
+import ch.qos.logback.core.status.Status;
 
 @RestController
 @CrossOrigin(origins = "*" )//  autorise la communication entre application front-end et back-end
@@ -52,9 +56,9 @@ public class InternauteRestController {
 		return internauteService.findById(id);
 	}
 	
-	@GetMapping("/internautes/{nom}")
+	@GetMapping("/internautes/findByNom/{nom}")
 	public Optional<List<Internaute>> findByNom(@PathVariable String nom) {
-		return internauteService.findByNom(nom);
+		return Optional.of(internauteService.findByNomContains(nom));
 	}
 	
 	@PostMapping("/internautes")
@@ -66,6 +70,6 @@ public class InternauteRestController {
 	@DeleteMapping("/internautes/{id}")
 	public ResponseEntity<Long> save(@PathVariable Long id) {
 		
-		return new ResponseEntity<Long>(internauteService.delete(id), HttpStatus.OK);
+		return new ResponseEntity<Long>(internauteService.deleteById(id), HttpStatus.OK);
 	}
 }

@@ -6,18 +6,25 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 
+import org.springframework.lang.Nullable;
+
 @Entity
 public class LienTest {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "id_Sequence")
-	@SequenceGenerator(name = "id_Sequence", sequenceName = "LIENTEST_ID_FK")
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	
 	private String lien;
 	
+	@Nullable
 	private String commentaires;
 
+	public LienTest(String lien) {
+		super();
+		this.lien = lien;
+	}
+	
 	public LienTest(String lien, String commentaires) {
 		super();
 		this.lien = lien;
