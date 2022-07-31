@@ -4,13 +4,14 @@ import java.util.List;
 import java.util.Optional;
 
 import com.example.demo.dao.InternauteRepository;
+import com.example.demo.entities.Email;
 import com.example.demo.entities.Internaute;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service(value = "internauteService")
-public class InternauteService implements IService<Internaute> {
+public class InternauteService implements IService<Internaute>,InternauteServiceMetier {
 
 	@Autowired
 	private InternauteRepository itRepository;
@@ -57,6 +58,17 @@ public class InternauteService implements IService<Internaute> {
 	public List<Internaute> findByNomContains(String element) {
 		// TODO Auto-generated method stub
 		return itRepository.findByNomContains(element);
+	}
+	@Override
+	public Optional<List<Internaute>> findByEmailContains(Email element) {
+		// TODO Auto-generated method stub
+		return Optional.of(itRepository.findByEmailContains(element));
+	}
+
+	@Override
+	public Optional<List<Internaute>> findByPrenomContains(String element) {
+		// TODO Auto-generated method stub
+		return Optional.of(itRepository.findByPrenomContains(element));
 	}
 
 	

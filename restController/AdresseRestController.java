@@ -26,7 +26,7 @@ public class AdresseRestController {
 	@Autowired
 	private IService<Adresse> adresseService;
 	
-	@PutMapping("/adresse/{id}")
+	@PutMapping("/adresses/{id}")
 	public ResponseEntity<Adresse> modify(@PathVariable Long id, @RequestBody Adresse target) {
 
 		Adresse addr = adresseService.findById(id).orElseThrow(
@@ -41,25 +41,25 @@ public class AdresseRestController {
 	}
 	
 	// http://localhost:8080/adresse
-	@GetMapping("/adresse")
+	@GetMapping("/adresses")
 	public ResponseEntity<List<Adresse>> showAll() {
 		return new ResponseEntity<List<Adresse>>(adresseService.findAll(), HttpStatus.OK);
 	}
 	
-	@GetMapping("/adresse/{id}")
+	@GetMapping("/adresses/{id}")
 	public Optional<Adresse> findById(@PathVariable Long id) {
 		return adresseService.findById(id);
 	}
 	
 	
 	
-	@PostMapping("/adresse")
+	@PostMapping("/adresses")
 	public ResponseEntity<Adresse> save(@RequestBody Adresse i) {
 		
 		return new ResponseEntity<Adresse>(adresseService.saveOrUpdate(i), HttpStatus.OK);
 	}
 	
-	@DeleteMapping("/adresse/{id}")
+	@DeleteMapping("/adresses/{id}")
 	public ResponseEntity<Long> save(@PathVariable Long id) {
 		
 		return new ResponseEntity<Long>(adresseService.deleteById(id), HttpStatus.OK);

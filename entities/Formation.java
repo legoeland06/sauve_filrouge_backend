@@ -25,7 +25,7 @@ import org.springframework.lang.Nullable;
 public class Formation {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
 	private String intitule;

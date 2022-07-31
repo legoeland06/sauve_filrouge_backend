@@ -6,9 +6,16 @@ import java.util.List;
 
 import javax.print.attribute.standard.DateTimeAtProcessing;
 
+import com.example.demo.dao.AdresseRepository;
+import com.example.demo.dao.CategorieRepository;
 import com.example.demo.dao.CommandeRepository;
+import com.example.demo.dao.EmailRepository;
 import com.example.demo.dao.EntrepriseRepository;
+import com.example.demo.dao.FormateurRepository;
+import com.example.demo.dao.FormationRepository;
 import com.example.demo.dao.InternauteRepository;
+import com.example.demo.dao.LienTestRepository;
+import com.example.demo.dao.NiveauRepository;
 import com.example.demo.dao.TelephoneRepository;
 import com.example.demo.entities.Adresse;
 import com.example.demo.entities.Client;
@@ -31,19 +38,90 @@ public class RunnerConfig implements CommandLineRunner {
 	private TelephoneRepository tl;
 
 	@Autowired
+	private NiveauRepository nvRepository;
+
+	@Autowired
+	private AdresseRepository adrRepository;
+
+	@Autowired
 	private InternauteRepository internauteRepository;
 	
+	@Autowired
+	private EntrepriseRepository entrepriseRepository;
+
 	@Autowired
 	private CommandeRepository cmdRepository;
 
 	@Autowired
-	private EntrepriseRepository entrepriseRepository;
+	private CategorieRepository catRepository;
+	
+	@Autowired
+	private EmailRepository emailRepository;
+	
+	@Autowired
+	private FormationRepository fmRepository;
 
+	@Autowired
+	private FormateurRepository frRepository;
+
+	@Autowired
+	private LienTestRepository ltRepository;
+
+	
 	@Override
 	public void run(String... args) throws Exception {
 		// TODO Auto-generated method stub
+	
+		nvRepository.save(new Niveau("xs"));
+		nvRepository.save(new Niveau("s"));
+		nvRepository.save(new Niveau("m"));
+		nvRepository.save(new Niveau("ml"));
+		nvRepository.save(new Niveau("l"));
+		nvRepository.save(new Niveau("xl"));
+		nvRepository.save(new Niveau("xxl"));
+		
+		List<Adresse> adresses1 = new ArrayList<Adresse>();
+		List<Adresse> adresses2 = new ArrayList<Adresse>();
 
+		Adresse adresse1 = new Adresse();
+		Adresse adresse2 = new Adresse();
+		Adresse adresse3 = new Adresse();
+		Adresse adresse4 = new Adresse();
+
+		adresse1.setRue("rue de la pissiculture");
+		adresse1.setCp("83790");
+		adresse1.setVille("Pignans");
+		adresse1.setPays("france");
+		adrRepository.save(adresse1);
+
+		adresse2.setRue("avenue St Roch");
+		adresse2.setCp("06100");
+		adresse2.setVille("Nice");
+		adresse2.setPays("france");
+		adrRepository.save(adresse2);
+
+		adresse3.setRue("chemin de troie");
+		adresse3.setCp("75000");
+		adresse3.setVille("Paris 1");
+		adresse3.setPays("france");
+		adrRepository.save(adresse3);
+
+		adresse4.setRue("boulevard René Cassin");
+		adresse4.setCp("13127");
+		adresse4.setVille("Marseille");
+		adresse4.setPays("france");
+		adrRepository.save(adresse4);
+
+		adresses1.add(adresse1);
+		adresses1.add(adresse2);
+
+		adresses2.add(adresse3);
+		adresses2.add(adresse4);
+		
 		Internaute internaute = new Internaute("Eric", "bruneau");
+		internaute.setEmail(new Email("ericbruneau@gmail.com"));
+		
+		//internaute.setAdresses(adresses1);
 		Commande commande = new Commande();
 		commande.setSolde(44425D);
 		commande.setFormation(new Formation("JAVA JEE","Devellopement SPRING BOOT"));
@@ -56,6 +134,8 @@ public class RunnerConfig implements CommandLineRunner {
 		entreprise.setRaisonSociale("LE MONDE DES BISOUNOURS");
 		entreprise.setContactEntrepriseNom("LEMOINS");
 		entreprise.setContactEntreprisePrenom("ludovic");
+		//entreprise.setAdresses(adresses2);
+		
 		entrepriseRepository.save(entreprise);
 		
 		internauteRepository.save(new Internaute("Sophia", "calage"));
@@ -196,22 +276,7 @@ public class RunnerConfig implements CommandLineRunner {
 //	@Override
 //	public void run(String... args) throws Exception {
 //
-//		Niveau xs = new Niveau("xs");
-//		Niveau s = new Niveau("s");
-//		Niveau m = new Niveau("m");
-//		Niveau l = new Niveau("l");
-//		Niveau xl = new Niveau("xl");
-//		Niveau xxl = new Niveau("xxl");
-//		Niveau xxxl = new Niveau("xxxl");
 //		
-//		
-//		nv.save(xs);
-//		nv.save(s);
-//		nv.save(m);
-//		nv.save(l);
-//		nv.save(xl);
-//		nv.save(xxl);
-//		nv.save(xxxl);
 //
 //		Email em1 = (new Email("sophiaseller@gmail.com"));
 //		Email em2 = (new Email("strauss-khan@gmail.com"));

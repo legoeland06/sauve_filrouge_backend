@@ -20,44 +20,45 @@ import javax.persistence.Table;
 import org.springframework.lang.Nullable;
 
 @Entity
-@DiscriminatorValue(value="INTERNAUTE")
-public class Internaute extends Client{
+@DiscriminatorValue(value = "INTERNAUTE")
+public class Internaute extends Client {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
+
 	private String nom;
-	
+
 	private String prenom;
-	
+
 	@OneToOne(cascade = { CascadeType.PERSIST, CascadeType.ALL })
+	@JoinColumn(name = "email")
 	private Email email;
-	
+
 	@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.ALL })
-	@JoinColumn(name="niveau")
+	@JoinColumn(name = "niveau")
 	private Niveau niveau;
 
 	@Nullable
 	@OneToMany(cascade = { CascadeType.PERSIST, CascadeType.ALL })
 	private List<Adresse> adresses;
-	
+
 	@Nullable
 	@OneToMany(cascade = { CascadeType.PERSIST, CascadeType.ALL })
 	private List<Telephone> telephones;
-	
+
 	public Internaute() {
 		super();
 	}
-	
+
 	public Internaute(String nom, String prenom) {
 		super();
 		this.nom = nom;
-		this.prenom = prenom;		
+		this.prenom = prenom;
 	}
 
-	public Internaute( String nom, String prenom, Email email,Niveau niveau,
-			List<Adresse> adresses, List<Telephone> telephones) {
+	public Internaute(String nom, String prenom, Email email, Niveau niveau, List<Adresse> adresses,
+			List<Telephone> telephones) {
 		super();
 		this.nom = nom;
 		this.prenom = prenom;
@@ -74,7 +75,6 @@ public class Internaute extends Client{
 	public void setId(Long id) {
 		this.id = id;
 	}
-
 
 	public String getNom() {
 		return nom;
@@ -126,9 +126,8 @@ public class Internaute extends Client{
 
 	@Override
 	public String toString() {
-		return "Internaute [id=" + id +  ", nom=" + nom + ", prenom=" + prenom + ", email=" + email + ", niveau=" + niveau + ", adresses=" + adresses + ", telephones=" + telephones
-				+ "]";
+		return "Internaute [id=" + id + ", nom=" + nom + ", prenom=" + prenom + ", email=" + email + ", niveau="
+				+ niveau + ", adresses=" + adresses + ", telephones=" + telephones + "]";
 	}
 
-	
 }

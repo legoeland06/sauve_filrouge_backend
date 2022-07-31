@@ -5,8 +5,10 @@ import java.util.Optional;
 
 import javax.swing.text.html.Option;
 
+import com.example.demo.entities.Email;
 import com.example.demo.entities.Internaute;
 import com.example.demo.services.IService;
+import com.example.demo.services.InternauteServiceMetier;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -30,6 +32,9 @@ public class InternauteRestController {
 
 	@Autowired
 	private IService<Internaute> internauteService;
+	
+	@Autowired
+	private InternauteServiceMetier interServiceMetier;
 	
 	@PutMapping("/internautes/{id}")
 	public ResponseEntity<Internaute> modify(@PathVariable Long id, @RequestBody Internaute target) {
@@ -59,6 +64,16 @@ public class InternauteRestController {
 	@GetMapping("/internautes/findByNom/{nom}")
 	public Optional<List<Internaute>> findByNom(@PathVariable String nom) {
 		return Optional.of(internauteService.findByNomContains(nom));
+	}
+	@GetMapping("/internautes/findByPrenom/{element}")
+	public Optional<List<Internaute>> findByPrenom(@PathVariable String element) {
+		return interServiceMetier.findByPrenomContains(element);
+	}
+	
+	@GetMapping("/internautes/findByEmail/{element}")
+	public Optional<List<Internaute>> findByEmail(@PathVariable Email element) {
+		
+		return interServiceMetier.findByEmailContains(element);
 	}
 	
 	@PostMapping("/internautes")
