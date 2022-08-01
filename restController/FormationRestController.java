@@ -40,7 +40,6 @@ public class FormationRestController {
 		return new ResponseEntity<Formation>(formationService.saveOrUpdate(fm), HttpStatus.OK);
 	}
 	
-	// http://localhost:8080/formations
 	@GetMapping("/formations")
 	public ResponseEntity<List<Formation>> showAll() {
 		return new ResponseEntity<List<Formation>>(formationService.findAll(), HttpStatus.OK);
@@ -53,7 +52,7 @@ public class FormationRestController {
 	
 	@GetMapping("/formations/findByIntitule/{intitule}")
 	public Optional<List<Formation>> findByNom(@PathVariable String intitule) {
-		return Optional.of(formationService.findByNomContains(intitule));
+		return formationService.findByNomContains(intitule);
 	}
 	
 	@PostMapping("/formations")

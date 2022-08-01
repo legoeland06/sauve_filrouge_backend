@@ -1,9 +1,10 @@
 package com.example.demo.restController;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import com.example.demo.entities.Categorie;
+import com.example.demo.dao.CategorieRepository;
 import com.example.demo.entities.Categorie;
 import com.example.demo.services.IService;
 
@@ -26,6 +27,8 @@ public class CategorieRestController {
 
 	@Autowired
 	private IService<Categorie> categorieService;
+	@Autowired
+	private CategorieRepository categorieRepository;
 	
 	@PutMapping("/categories/{id}")
 	public ResponseEntity<Categorie> modify(@PathVariable Long id, @RequestBody Categorie target) {
@@ -49,7 +52,26 @@ public class CategorieRestController {
 		return categorieService.findById(id);
 	}
 	
-	
+	@GetMapping("/categories/findByIntitule/{intitule}")
+	public Optional<List<Categorie>> findByIntitule(@PathVariable String intitule) {
+		return categorieRepository.findByIntituleContains(intitule);
+	}	
+	@GetMapping("/categories/findByMere/{id}")
+	public Optional<List<Categorie>> findByMere(@PathVariable Long id) {
+		List<Categorie> result = categorieRepository.findAll();
+		List<Categorie> filtreCategorie = new ArrayList<Categorie>();
+		result.forEach((p)->{
+			try {
+				if (p.getMere().getId()==id) {
+					filtreCategorie.add(p);
+				}
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+		});
+		
+		return Optional.of(filtreCategorie) ;
+	}	
 	
 	@PostMapping("/categories")
 	public ResponseEntity<Categorie> save(@RequestBody Categorie i) {

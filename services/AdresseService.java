@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service(value="adresseService")
-public class AdresseService implements IService<Adresse> {
+public class AdresseService implements IAdresse<Adresse> {
 
 	@Autowired
 	private AdresseRepository adrRepository;
@@ -52,10 +52,27 @@ public class AdresseService implements IService<Adresse> {
 		adrRepository.delete(o);
 	}
 
-	@Override
-	public List<Adresse> findByNomContains(String element) {
+	public Optional<List<Adresse>> findByVilleContains(String element) {
 		// TODO Auto-generated method stub
 		return adrRepository.findByVilleContains(element);
+	}
+
+	@Override
+	public Optional<List<Adresse>> findByRueContains(String rue) {
+		// TODO Auto-generated method stub
+		return Optional.empty();
+	}
+
+	@Override
+	public Optional<List<Adresse>> findByPaysContains(String rue) {
+		// TODO Auto-generated method stub
+		return Optional.empty();
+	}
+
+	@Override
+	public Optional<List<Adresse>> findByCp(String rue) {
+		// TODO Auto-generated method stub
+		return Optional.empty();
 	}
 
  

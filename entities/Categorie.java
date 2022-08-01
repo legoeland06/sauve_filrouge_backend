@@ -1,18 +1,10 @@
 package com.example.demo.entities;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
-import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
@@ -25,21 +17,17 @@ public class Categorie {
 
 	private String intitule;
 
-	@ManyToMany
-	private List<Categorie> meres = new ArrayList<>();
-
-	@ManyToMany(mappedBy = "meres")
-	private List<Categorie> filles = new ArrayList<>();
+	@ManyToOne
+	private Categorie mere;
 
 	public Categorie(String intitule) {
 		super();
 		this.intitule=intitule;
 	}
-	public Categorie(String intitule, List<Categorie> meres, List<Categorie> filles) {
+	public Categorie(String intitule, Categorie mere) {
 		super();
 		this.intitule = intitule;
-		this.meres = meres;
-		this.filles = filles;
+		this.mere = mere;
 	}
 
 	public Categorie() {
@@ -62,25 +50,17 @@ public class Categorie {
 		this.intitule = intitule;
 	}
 
-	public List<Categorie> getMeres() {
-		return meres;
+	public Categorie getMere() {
+		return mere;
 	}
 
-	public void setMere(List<Categorie> meres) {
-		this.meres = meres;
-	}
-
-	public List<Categorie> getFilles() {
-		return filles;
-	}
-
-	public void setFille(List<Categorie> filles) {
-		this.filles = filles;
+	public void setMere(Categorie mere) {
+		this.mere = mere;
 	}
 
 	@Override
 	public String toString() {
-		return "Categorie [id=" + id + ", intitule=" + intitule + ", mere=" + meres + ", fille=" + filles + "]";
+		return "Categorie [id=" + id + ", intitule=" + intitule + ", mere=" + mere + "]";
 	}
 
 }

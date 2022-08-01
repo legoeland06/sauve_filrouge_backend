@@ -1,15 +1,11 @@
 package com.example.demo.entities;
 
-import java.util.List;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -24,14 +20,12 @@ public class Formateur {
 
 	private String prenom;
 
-	@OneToOne
-	private Email email;
+	private String email;
 
-	@OneToMany(cascade = { CascadeType.PERSIST, CascadeType.ALL })
-	private List<Telephone> telephones;
+	private String telephone;
 	
-	@ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.ALL })
-	private List<Categorie> categories;
+	@ManyToOne (cascade = { CascadeType.MERGE, CascadeType.ALL })
+	private Categorie categorie;
 
 	public Formateur(String nom, String prenom) {
 		super();
@@ -39,13 +33,12 @@ public class Formateur {
 		this.prenom = prenom;
 	}
 	
-	public Formateur(String nom, String prenom, Email email, List<Telephone> telephones,List<Categorie> categories) {
+	public Formateur(String nom, String prenom, String email, String telephone) {
 		super();
 		this.nom = nom;
 		this.prenom = prenom;
 		this.email = email;
-		this.telephones = telephones;
-		this.categories = categories;
+		this.telephone = telephone;
 	}
 
 	public Formateur() {
@@ -76,35 +69,35 @@ public class Formateur {
 		this.prenom = prenom;
 	}
 
-	public Email getEmail() {
+	public String getEmail() {
 		return email;
 	}
 
-	public void setEmail(Email email) {
+	public void setEmail(String email) {
 		this.email = email;
 	}
 
-	public List<Telephone> getTelephone() {
-		return telephones;
+	public String getTelephone() {
+		return telephone;
 	}
 
-	public void setTelephone(List<Telephone> telephones) {
-		this.telephones = telephones;
+	public void setTelephone(String telephone) {
+		this.telephone = telephone;
 	}
 	
 
-	public List<Categorie> getCategories() {
-		return categories;
+	public Categorie getCategorie() {
+		return categorie;
 	}
 
-	public void setCategories(List<Categorie> categories) {
-		this.categories = categories;
+	public void setCategorie(Categorie categorie) {
+		this.categorie = categorie;
 	}
 
 	@Override
 	public String toString() {
 		return "Formateur [id=" + id + ", nom=" + nom + ", prenom=" + prenom + ", email=" + email + ", telephone="
-				+ telephones + ", Catégories "+ categories +"]";
+				+ telephone + ", Catégorie "+ categorie +"]";
 	}
 
 }

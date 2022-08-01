@@ -3,6 +3,7 @@ package com.example.demo.services;
 import java.util.List;
 import java.util.Optional;
 
+import com.example.demo.entities.Categorie;
 import com.example.demo.entities.Commande;
 import com.example.demo.entities.Internaute;
 
@@ -18,6 +19,6 @@ public interface IService<T> {
 	
 	void delete(T o);
 	
-	List<T> findByNomContains(String element);
+	Optional<List<T>> findByNomContains(String element);
 	
 }

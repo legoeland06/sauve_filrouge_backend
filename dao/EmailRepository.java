@@ -12,7 +12,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface EmailRepository  extends JpaRepository<Email, Long>{
 
-	List<Email> findByEmailContains(String element);
+	Optional<List<Email>> findByEmailContains(String element);
 
 	
 }

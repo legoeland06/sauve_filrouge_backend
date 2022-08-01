@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Optional;
 
 import com.example.demo.dao.CategorieRepository;
-import com.example.demo.dao.CommandeRepository;
 import com.example.demo.entities.Categorie;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,7 +48,7 @@ public class CategorieService implements IService<Categorie> {
 	}
 
 	@Override
-	public List<Categorie> findByNomContains(String element) {
+	public Optional<List<Categorie>> findByNomContains(String element) {
 		// TODO Auto-generated method stub
 		return catRepository.findByIntituleContains(element);
 	}

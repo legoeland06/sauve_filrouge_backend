@@ -15,7 +15,7 @@ public class FormateurService implements IService<Formateur> {
 	@Autowired
 	private FormateurRepository frmtrRepository;
 
-	public List<Formateur> findByNomContains(String element){
+	public Optional<List<Formateur>> findByNomContains(String element){
 		return frmtrRepository.findByNomContains(element);
 	}
 	@Override
@@ -31,7 +31,7 @@ public class FormateurService implements IService<Formateur> {
 		changedFormateur.setNom(o.getNom());
 		changedFormateur.setPrenom(o.getPrenom());
 		changedFormateur.setEmail(o.getEmail());
-		changedFormateur.setCategories(o.getCategories());
+		changedFormateur.setCategorie(o.getCategorie());
 		changedFormateur.setTelephone(o.getTelephone());
 		
 		return frmtrRepository.save(changedFormateur);

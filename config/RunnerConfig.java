@@ -1,10 +1,7 @@
 package com.example.demo.config;
 
-import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.print.attribute.standard.DateTimeAtProcessing;
 
 import com.example.demo.dao.AdresseRepository;
 import com.example.demo.dao.CategorieRepository;
@@ -18,14 +15,13 @@ import com.example.demo.dao.LienTestRepository;
 import com.example.demo.dao.NiveauRepository;
 import com.example.demo.dao.TelephoneRepository;
 import com.example.demo.entities.Adresse;
-import com.example.demo.entities.Client;
+import com.example.demo.entities.Categorie;
 import com.example.demo.entities.Commande;
-import com.example.demo.entities.Email;
 import com.example.demo.entities.Entreprise;
+import com.example.demo.entities.Formateur;
 import com.example.demo.entities.Formation;
 import com.example.demo.entities.Internaute;
 import com.example.demo.entities.Niveau;
-import com.example.demo.entities.Telephone;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -45,7 +41,7 @@ public class RunnerConfig implements CommandLineRunner {
 
 	@Autowired
 	private InternauteRepository internauteRepository;
-	
+
 	@Autowired
 	private EntrepriseRepository entrepriseRepository;
 
@@ -54,10 +50,10 @@ public class RunnerConfig implements CommandLineRunner {
 
 	@Autowired
 	private CategorieRepository catRepository;
-	
+
 	@Autowired
 	private EmailRepository emailRepository;
-	
+
 	@Autowired
 	private FormationRepository fmRepository;
 
@@ -67,11 +63,10 @@ public class RunnerConfig implements CommandLineRunner {
 	@Autowired
 	private LienTestRepository ltRepository;
 
-	
 	@Override
 	public void run(String... args) throws Exception {
 		// TODO Auto-generated method stub
-	
+
 		nvRepository.save(new Niveau("xs"));
 		nvRepository.save(new Niveau("s"));
 		nvRepository.save(new Niveau("m"));
@@ -79,7 +74,84 @@ public class RunnerConfig implements CommandLineRunner {
 		nvRepository.save(new Niveau("l"));
 		nvRepository.save(new Niveau("xl"));
 		nvRepository.save(new Niveau("xxl"));
+
+		// Catégorie INITIALE
+		Categorie mere = new Categorie("Categories");
+		catRepository.save(mere);
 		
+		Categorie dev = new Categorie("Developpement",mere);
+		Categorie dev1 = new Categorie("Les bases de C++");
+		Categorie dev2 = new Categorie("Appli Et Micro Services JAVA SPRING BOOT");
+		Categorie dev3 = new Categorie("Appli Microsoft C# .NET");
+		Categorie dev4 = new Categorie("FRONT ET BACK Avec PYTHON - DJANGO");
+		Categorie dev5 = new Categorie("FRONT-END Avec ANGULAR JSON HTML5 TYPESCRIPT");
+		Categorie dev6 = new Categorie("Apprendre GO");
+		
+		dev1.setMere(dev);
+		dev2.setMere(dev);
+		dev3.setMere(dev);
+		dev4.setMere(dev);
+		dev5.setMere(dev);
+		dev6.setMere(dev);
+		
+		catRepository.save(dev);
+		
+		catRepository.save(dev1);
+		catRepository.save(dev2);
+		catRepository.save(dev3);
+		catRepository.save(dev4);
+		catRepository.save(dev5);
+		catRepository.save(dev6);
+		
+		Categorie sgbd = new Categorie("SGBD",mere);
+		Categorie sgbd1 = new Categorie("Mysql et requetes");
+		Categorie sgbd2 = new Categorie("Oracle");
+		Categorie sgbd3 = new Categorie("NoSql");
+		Categorie sgbd4 = new Categorie("JSON-SERVER");
+		sgbd1.setMere(sgbd);
+		sgbd2.setMere(sgbd);
+		sgbd3.setMere(sgbd);
+		sgbd4.setMere(sgbd);
+		
+		catRepository.save(sgbd);
+		catRepository.save(sgbd1);
+		catRepository.save(sgbd2);
+		catRepository.save(sgbd3);
+		catRepository.save(sgbd4);		
+		
+		Categorie ia = new Categorie("IA",mere);
+		Categorie ia1 = new Categorie("Réseau de neuronnes");
+		Categorie ia2 = new Categorie("BigData");
+		Categorie ia3 = new Categorie("Comment utiliser L'Ia");
+		
+		catRepository.save(ia);
+		ia1.setMere(ia);
+		ia2.setMere(ia);
+		ia3.setMere(ia);
+
+		Categorie softskill = new Categorie("SoftSkill",mere);
+		
+		Categorie caodao = new Categorie("CAO-DAO",mere);
+		
+		Categorie d3 = new Categorie("3D",mere);
+		
+		Categorie secAdm = new Categorie("Sécurité / Administration",mere);
+		
+		Categorie linuxAdmin = new Categorie("Linux Administration",mere);
+		
+		Categorie busi = new Categorie("Business",mere);
+		
+		Categorie devsec = new Categorie("DevSecOps",mere);
+		
+		catRepository.save(softskill);
+		catRepository.save(caodao);
+		catRepository.save(d3);
+		catRepository.save(secAdm);
+		catRepository.save(linuxAdmin);
+		catRepository.save(busi);
+		catRepository.save(devsec);
+
+
 		List<Adresse> adresses1 = new ArrayList<Adresse>();
 		List<Adresse> adresses2 = new ArrayList<Adresse>();
 
@@ -117,47 +189,131 @@ public class RunnerConfig implements CommandLineRunner {
 
 		adresses2.add(adresse3);
 		adresses2.add(adresse4);
-		
-		Internaute internaute = new Internaute("Eric", "bruneau");
-		internaute.setEmail(new Email("ericbruneau@gmail.com"));
-		
-		//internaute.setAdresses(adresses1);
+
+		Internaute internaute = new Internaute("Eric", "bruneau", "ml");
+		internaute.setEmail("ericbruneau@gmail.com");
+
 		Commande commande = new Commande();
+		Commande commande1 = new Commande();
+		Commande commande2 = new Commande();
+		Commande commande3 = new Commande();
+		commande1.setFormation(new Formation("TYPES SCRIPT", "Developpez Angular Framework"));
+		commande1.setSolde(15324D);
+		commande2.setFormation(new Formation("PHP", "Site Dynamique"));
+		commande2.setSolde(11002D);
+		commande3.setFormation(new Formation("PYTHON", "Developpez Django Framework"));
 		commande.setSolde(44425D);
-		commande.setFormation(new Formation("JAVA JEE","Devellopement SPRING BOOT"));
+		commande3.setSolde(13245D);
+		commande.setFormation(new Formation("JAVA JEE", "Devellopement SPRING BOOT"));
 		cmdRepository.save(commande);
-		
+		cmdRepository.save(commande1);
+		cmdRepository.save(commande2);
+		cmdRepository.save(commande3);
+
 		internaute.setCurrentCommande(commande);
-		internauteRepository.save(internaute);
-		
+
 		Entreprise entreprise = new Entreprise();
 		entreprise.setRaisonSociale("LE MONDE DES BISOUNOURS");
 		entreprise.setContactEntrepriseNom("LEMOINS");
 		entreprise.setContactEntreprisePrenom("ludovic");
-		//entreprise.setAdresses(adresses2);
-		
+		internaute.setTelephone("0425658985");
+
+		Internaute i1 = new Internaute("Georges", "De La Jungle", "s");
+		Internaute i2 = new Internaute("Sisi", "L'impératrice", "l");
+		Internaute i3 = new Internaute("Sacha", "Faitout", "s");
+		Internaute i4 = new Internaute("Armand", "lucier", "xxxl");
+		Internaute i5 = new Internaute("farah", "Mineuse", "xxl");
+		Internaute i6 = new Internaute("Talaron", "delphine", "xs");
+		Internaute i7 = new Internaute("Sigmund", "Freud", "s");
+		Internaute i8 = new Internaute("Georges", "Washington", "xl");
+
+		i8.setAdresse(adresse4);
+		i8.setTelephone("0425125474");
+		i8.setEmail("georgesWash@gmail.com");
+
+		i4.setAdresse(adresse3);
+		i6.setAdresse(adresse2);
+
+		internauteRepository.save(internaute);
+		internauteRepository.save(i1);
+		internauteRepository.save(i2);
+		internauteRepository.save(i3);
+		internauteRepository.save(i4);
+		internauteRepository.save(i5);
+		internauteRepository.save(i6);
+		internauteRepository.save(i7);
+		internauteRepository.save(i8);
+
 		entrepriseRepository.save(entreprise);
+
+		frRepository.save(new Formateur("Lucas","Lamar","LucasLamar@gmail.com","0625458724"));
+		frRepository.save(new Formateur("Gilles","Lamar","LamarGilles@gmail.com","5241253685"));
+		frRepository.save(new Formateur("robert","silous","robertsilous@gmail.fr","4125457845"));
+		frRepository.save(new Formateur("eric","frutier","ericfrutier@gmail.fr","1245021245"));
+		frRepository.save(new Formateur("gaëlle","Lamar","Lamargaëlle@gmail.com","0635245878"));
 		
-		internauteRepository.save(new Internaute("Sophia", "calage"));
-		internauteRepository.save(new Internaute("Jerome", "leclerc"));
-		internauteRepository.save(new Internaute("Charles", "saugier"));
-		internauteRepository.save(new Internaute("Loubna", "rameur"));
-		internauteRepository.save(new Internaute("marwa", "carre"));
-		internauteRepository.save(new Internaute("julie", "solies"));
+		Formateur leFormateur = new Formateur("Sylvie","Aubert","sylvieaubert@gmail.fr","0625451254");
+		frRepository.save(leFormateur);
+		leFormateur.setCategorie(devsec);
+		frRepository.saveAndFlush(leFormateur);
 		
+		Formateur leFormateur1 = new Formateur("Regina","Santomatte","@ReginaSantomattegmail.com","0524585774");
+		frRepository.save(leFormateur1);
+		leFormateur1.setCategorie(ia);
+		frRepository.saveAndFlush(leFormateur1);
+		
+		Formateur leFormateur2 = new Formateur("Sisi","Mosquito","SisiMosquito@gmail.fr","5235689545");
+		frRepository.save(leFormateur2);
+		leFormateur2.setCategorie(sgbd2);
+		frRepository.saveAndFlush(leFormateur2);
+		
+		Formateur leFormateur3 = new Formateur("Carole","Lamar","LamarCarole@gmail.fr","0256352457");
+		frRepository.save(leFormateur3);
+		leFormateur3.setCategorie(sgbd3);
+		frRepository.saveAndFlush(leFormateur3);
+		
+		Formateur leFormateur4 = new Formateur("Gilles","Lamar","LamarGilles@gmail.com","5241253685");
+		frRepository.save(leFormateur4);
+		leFormateur4.setCategorie(sgbd4);
+		frRepository.saveAndFlush(leFormateur4);
+		
+		Formateur leFormateur5 = new Formateur("robert","silous","robertsilous@gmail.fr","4125457845");
+		frRepository.save(leFormateur5);
+		leFormateur5.setCategorie(linuxAdmin);
+		frRepository.saveAndFlush(leFormateur5);
+		
+		Formateur leFormateur6 = new Formateur("eric","frutier","ericfrutier@gmail.fr","1245021245");
+		frRepository.save(leFormateur6);
+		leFormateur6.setCategorie(secAdm);
+		frRepository.saveAndFlush(leFormateur6);
+		
+		Formateur leFormateur7 = new Formateur("gaëlle","Lamar","Lamargaëlle@gmail.com","0635245878");
+		frRepository.save(leFormateur7);
+		leFormateur7.setCategorie(busi);
+		frRepository.saveAndFlush(leFormateur7);
+		
+		
+		
+
+		internauteRepository.save(new Internaute("Sophia", "calage", "xl"));
+		internauteRepository.save(new Internaute("Jerome", "leclerc", "l"));
+		internauteRepository.save(new Internaute("Charles", "saugier", "xs"));
+		internauteRepository.save(new Internaute("Loubna", "rameur", "s"));
+		internauteRepository.save(new Internaute("marwa", "carre", "xxl"));
+		internauteRepository.save(new Internaute("julie", "solies", "xl"));
+
 		System.out.println("*******************************************************");
-		internauteRepository.findAll().forEach((p)->{
-			System.out.println(p.getNom()+", "+p.getPrenom());
+		internauteRepository.findAll().forEach((p) -> {
+			System.out.println(p.getNom() + ", " + p.getPrenom());
 		});
-		
+
 		System.out.println("*******************************************************");
-		cmdRepository.findAll().forEach((c)->{
+		cmdRepository.findAll().forEach((c) -> {
 			Formation formation = c.getFormation();
-			System.out.println(formation.getIntitule().toString()+", "+formation.getDescriptif()+" : "+ (c.getSolde().toString()));
+			System.out.println(formation.getIntitule().toString() + ", " + formation.getDescriptif() + " : "
+					+ (c.getSolde().toString()));
 		});
-		
-		
-		
+
 //		Telephone t1 = new Telephone("0456251548");
 //		tl.save(t1);
 //

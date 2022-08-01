@@ -55,20 +55,20 @@ public class InternauteService implements IService<Internaute>,InternauteService
 	}
 
 	@Override
-	public List<Internaute> findByNomContains(String element) {
+	public Optional<List<Internaute>> findByNomContains(String element) {
 		// TODO Auto-generated method stub
 		return itRepository.findByNomContains(element);
 	}
 	@Override
 	public Optional<List<Internaute>> findByEmailContains(Email element) {
 		// TODO Auto-generated method stub
-		return Optional.of(itRepository.findByEmailContains(element));
+		return itRepository.findByEmailContains(element);
 	}
 
 	@Override
 	public Optional<List<Internaute>> findByPrenomContains(String element) {
 		// TODO Auto-generated method stub
-		return Optional.of(itRepository.findByPrenomContains(element));
+		return itRepository.findByPrenomContains(element);
 	}
 
 	

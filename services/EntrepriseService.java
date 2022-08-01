@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import com.example.demo.dao.EntrepriseRepository;
+import com.example.demo.entities.Categorie;
 import com.example.demo.entities.Entreprise;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,8 +54,11 @@ public class EntrepriseService implements IService<Entreprise> {
 	}
 
 	@Override
-	public List<Entreprise> findByNomContains(String element) {
+	public Optional<List<Entreprise>> findByNomContains(String element) {
 		// TODO Auto-generated method stub
-		return entrepriseRepository.findByRaisonSocialeContains(element);
+		return Optional.empty();
 	}
+
+	
+	
 }

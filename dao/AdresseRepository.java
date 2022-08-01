@@ -12,8 +12,9 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface AdresseRepository  extends JpaRepository<Adresse, Long>{
 
-	List<Adresse> findByVilleContains(String element);
-	List<Adresse> findByRueContains(String element);
-	List<Adresse> findByCpContains(String element);
-	List<Adresse> findByPaysContains(String element);
+	Optional<List<Adresse>> findByVilleContains(String element);
+	Optional<List<Adresse>> findByRueContains(String element);
+	Optional<List<Adresse>> findByPaysContains(String element);
+	Optional<List<Adresse>> findByCp(String cp);
+	Optional<List<Adresse>> findByPays(String pays);
 }

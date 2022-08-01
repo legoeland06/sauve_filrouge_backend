@@ -11,5 +11,8 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface CategorieRepository  extends JpaRepository<Categorie, Long>{
 
-	List<Categorie> findByIntituleContains(String element);
+	Optional<List<Categorie>> findByIntituleContains(String element);
+	Optional<List<Categorie>> findByMere(String mere);
+	Optional<List<Categorie>> findByMereId(Long idMere);
+
 }

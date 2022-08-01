@@ -2,22 +2,11 @@ package com.example.demo.entities;
 
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
-
-import org.springframework.lang.Nullable;
 
 @Entity
 @DiscriminatorValue(value = "INTERNAUTE")
@@ -31,41 +20,25 @@ public class Internaute extends Client {
 
 	private String prenom;
 
-	@OneToOne(cascade = { CascadeType.PERSIST, CascadeType.ALL })
-	@JoinColumn(name = "email")
-	private Email email;
+	private String niveau;
 
-	@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.ALL })
-	@JoinColumn(name = "niveau")
-	private Niveau niveau;
-
-	@Nullable
-	@OneToMany(cascade = { CascadeType.PERSIST, CascadeType.ALL })
-	private List<Adresse> adresses;
-
-	@Nullable
-	@OneToMany(cascade = { CascadeType.PERSIST, CascadeType.ALL })
-	private List<Telephone> telephones;
+	public Internaute(String nom, String prenom, String niveau) {
+		this.nom = nom;
+		this.prenom = prenom;
+		this.niveau = niveau;
+	}
+	
+	public Internaute(String password, String email, Adresse adresse, String telephone, Commande currentCommande,
+			List<Commande> historyOfCommands, Long id, String nom, String prenom, String niveau) {
+		super(password, email, adresse, telephone, currentCommande, historyOfCommands);
+		this.id = id;
+		this.nom = nom;
+		this.prenom = prenom;
+		this.niveau = niveau;
+	}
 
 	public Internaute() {
 		super();
-	}
-
-	public Internaute(String nom, String prenom) {
-		super();
-		this.nom = nom;
-		this.prenom = prenom;
-	}
-
-	public Internaute(String nom, String prenom, Email email, Niveau niveau, List<Adresse> adresses,
-			List<Telephone> telephones) {
-		super();
-		this.nom = nom;
-		this.prenom = prenom;
-		this.email = email;
-		this.niveau = niveau;
-		this.adresses = adresses;
-		this.telephones = telephones;
 	}
 
 	public Long getId() {
@@ -92,42 +65,19 @@ public class Internaute extends Client {
 		this.prenom = prenom;
 	}
 
-	public Email getEmail() {
-		return email;
-	}
-
-	public void setEmail(Email email) {
-		this.email = email;
-	}
-
-	public Niveau getNiveau() {
+	public String getString() {
 		return niveau;
 	}
 
-	public void setNiveau(Niveau niveau) {
+	public void setString(String niveau) {
 		this.niveau = niveau;
-	}
-
-	public List<Adresse> getAdresses() {
-		return adresses;
-	}
-
-	public void setAdresses(List<Adresse> adresses) {
-		this.adresses = adresses;
-	}
-
-	public List<Telephone> getTelephones() {
-		return telephones;
-	}
-
-	public void setTelephones(List<Telephone> telephones) {
-		this.telephones = telephones;
 	}
 
 	@Override
 	public String toString() {
-		return "Internaute [id=" + id + ", nom=" + nom + ", prenom=" + prenom + ", email=" + email + ", niveau="
-				+ niveau + ", adresses=" + adresses + ", telephones=" + telephones + "]";
+		return "Internaute [id=" + id + ", nom=" + nom + ", prenom=" + prenom + ", niveau=" + niveau + ", toString()="
+				+ super.toString() + "]";
 	}
-
+	
+	
 }

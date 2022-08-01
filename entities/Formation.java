@@ -10,15 +10,10 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
-import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
-import org.springframework.beans.factory.annotation.Required;
-import org.springframework.lang.Nullable;
 
 @Entity
 @Table(name="formation")
@@ -30,7 +25,6 @@ public class Formation {
 	
 	private String intitule;
 	
-	@Nullable
 	private String descriptif;
 
 	private int duree;
@@ -39,17 +33,12 @@ public class Formation {
 	
 	private double prix;
 	
-	@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.ALL })
-	private Niveau niveau;
+	private String niveau;
 	
-	@Nullable
-	@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.ALL })
+	@OneToOne(cascade = { CascadeType.PERSIST, CascadeType.ALL })
 	private Adresse lieux;
 	
-	@Nullable
-	@Basic(fetch=FetchType.LAZY, optional=true)
-	@OneToOne(cascade = { CascadeType.PERSIST, CascadeType.ALL })
-	private LienTest lienTest;
+	private String lienTest;
 	
 	@Basic(fetch=FetchType.LAZY, optional=false)
 	@ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.ALL })
@@ -61,8 +50,8 @@ public class Formation {
 		this.descriptif = descriptif;
 	}
 	
-	public Formation(String intitule, String descriptif, int duree, Date dateDebut, double prix, Niveau niveau,
-			Adresse lieux, LienTest lienTest,List<Formateur> formateurs) {
+	public Formation(String intitule, String descriptif, int duree, Date dateDebut, double prix, String niveau,
+			Adresse lieux, String lienTest,List<Formateur> formateurs) {
 		super();
 		this.intitule = intitule;
 		this.descriptif = descriptif;
@@ -127,11 +116,11 @@ public class Formation {
 		this.prix = prix;
 	}
 
-	public Niveau getNiveau() {
+	public String getNiveau() {
 		return niveau;
 	}
 
-	public void setNiveau(Niveau niveau) {
+	public void setNiveau(String niveau) {
 		this.niveau = niveau;
 	}
 
@@ -143,11 +132,11 @@ public class Formation {
 		this.lieux = lieux;
 	}
 
-	public LienTest getLienTest() {
+	public String getLienTest() {
 		return lienTest;
 	}
 
-	public void setLienTest(LienTest lienTest) {
+	public void setLienTest(String lienTest) {
 		this.lienTest = lienTest;
 	}
 

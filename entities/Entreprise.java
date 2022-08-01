@@ -2,22 +2,12 @@ package com.example.demo.entities;
 
 import java.util.List;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinColumns;
-import javax.persistence.JoinTable;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
+
 
 @Entity
 @DiscriminatorValue(value="ENTRP")
@@ -32,18 +22,25 @@ public class Entreprise extends Client {
 	private String contactEntrepriseNom;
 	
 	private String contactEntreprisePrenom;
-	
-	@OneToMany(cascade = { CascadeType.PERSIST, CascadeType.ALL })
-	private List<Email> emails;
-
-	@OneToMany(cascade = { CascadeType.PERSIST, CascadeType.ALL })
-	private List<Adresse> adresses;
-
-	@OneToMany(cascade = { CascadeType.PERSIST, CascadeType.ALL })
-	private List<Telephone> telephones;
 
 	public Entreprise() {
 		super();
+	}
+
+	public Entreprise( String raisonSociale, String contactEntrepriseNom,
+			String contactEntreprisePrenom) {
+		this.raisonSociale = raisonSociale;
+		this.contactEntrepriseNom = contactEntrepriseNom;
+		this.contactEntreprisePrenom = contactEntreprisePrenom;
+	} 
+	
+	public Entreprise(String password, String email, Adresse adresse, String telephone, Commande currentCommande,
+			List<Commande> historyOfCommands, String raisonSociale, String contactEntrepriseNom,
+			String contactEntreprisePrenom) {
+		super(password, email, adresse, telephone, currentCommande, historyOfCommands);
+		this.raisonSociale = raisonSociale;
+		this.contactEntrepriseNom = contactEntrepriseNom;
+		this.contactEntreprisePrenom = contactEntreprisePrenom;
 	}
 
 	public Long getId() {
@@ -78,28 +75,11 @@ public class Entreprise extends Client {
 		this.contactEntreprisePrenom = contactEntreprisePrenom;
 	}
 
-	public List<Email> getEmails() {
-		return emails;
-	}
-
-	public void setEmails(List<Email> emails) {
-		this.emails = emails;
-	}
-
-	public List<Adresse> getAdresses() {
-		return adresses;
-	}
-
-	public void setAdresses(List<Adresse> adresses) {
-		this.adresses = adresses;
-	}
-
-	public List<Telephone> getTelephones() {
-		return telephones;
-	}
-
-	public void setTelephones(List<Telephone> telephones) {
-		this.telephones = telephones;
+	@Override
+	public String toString() {
+		return "Entreprise [id=" + id + ", raisonSociale=" + raisonSociale + ", contactEntrepriseNom="
+				+ contactEntrepriseNom + ", contactEntreprisePrenom=" + contactEntreprisePrenom + ", toString()="
+				+ super.toString() + "]";
 	}
 
 	

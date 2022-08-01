@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface TelephoneRepository  extends JpaRepository<Telephone, Long>{
 
-	List<Telephone> findByNumeroContains(String element);
+	Optional<List<Telephone>> findByNumeroContains(String element);
 
 
 }

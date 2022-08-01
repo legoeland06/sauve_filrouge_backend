@@ -48,7 +48,7 @@ public class NiveauService implements IService<Niveau> {
 	}
 
 	@Override
-	public List<Niveau> findByNomContains(String element) {
+	public Optional<List<Niveau>> findByNomContains(String element) {
 		// TODO Auto-generated method stub
 		return nvRepository.findByIntituleContains(element);
 	}

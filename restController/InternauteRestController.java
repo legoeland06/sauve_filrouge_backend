@@ -3,8 +3,6 @@ package com.example.demo.restController;
 import java.util.List;
 import java.util.Optional;
 
-import javax.swing.text.html.Option;
-
 import com.example.demo.entities.Email;
 import com.example.demo.entities.Internaute;
 import com.example.demo.services.IService;
@@ -20,11 +18,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
-
-import ch.qos.logback.core.status.Status;
 
 @RestController
 @CrossOrigin(origins = "*" )//  autorise la communication entre application front-end et back-end
@@ -50,7 +45,6 @@ public class InternauteRestController {
 		return new ResponseEntity<Internaute>(internauteService.saveOrUpdate(it), HttpStatus.OK);
 	}
 	
-	// http://localhost:8080/internautes
 	@GetMapping("/internautes")
 	public ResponseEntity<List<Internaute>> showAll() {
 		return new ResponseEntity<List<Internaute>>(internauteService.findAll(), HttpStatus.OK);
@@ -63,7 +57,7 @@ public class InternauteRestController {
 	
 	@GetMapping("/internautes/findByNom/{nom}")
 	public Optional<List<Internaute>> findByNom(@PathVariable String nom) {
-		return Optional.of(internauteService.findByNomContains(nom));
+		return internauteService.findByNomContains(nom);
 	}
 	@GetMapping("/internautes/findByPrenom/{element}")
 	public Optional<List<Internaute>> findByPrenom(@PathVariable String element) {

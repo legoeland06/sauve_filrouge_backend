@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Optional;
 
 import com.example.demo.entities.Formateur;
-import com.example.demo.entities.Internaute;
 import com.example.demo.services.IService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,7 +53,7 @@ public class FormateurRestController {
 	
 	@GetMapping("/formateurs/findByNomContains/{element}")
 	public Optional<List<Formateur>> findByNom(@PathVariable String element) {
-		return Optional.of(formateurService.findByNomContains(element));
+		return formateurService.findByNomContains(element);
 	}
 	
 	@PostMapping("/formateurs")

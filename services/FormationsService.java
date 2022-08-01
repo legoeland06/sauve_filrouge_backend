@@ -61,7 +61,7 @@ public class FormationsService implements IService<Formation> {
 	}
 
 	@Override
-	public List<Formation> findByNomContains(String element) {
+	public Optional<List<Formation>> findByNomContains(String element) {
 		// TODO Auto-generated method stub
 		return formationRepository.findByIntituleContains(element);
 	}

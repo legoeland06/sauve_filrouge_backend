@@ -49,7 +49,7 @@ public class TelephoneService implements IService<Telephone> {
 	}
 
 	@Override
-	public List<Telephone> findByNomContains(String element) {
+	public Optional<List<Telephone>> findByNomContains(String element) {
 		// TODO Auto-generated method stub
 		return telRepository.findByNumeroContains(element);
 	}

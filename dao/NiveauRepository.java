@@ -12,6 +12,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface NiveauRepository  extends JpaRepository<Niveau, Long>{
 
-	List<Niveau> findByIntituleContains(String element);
+	Optional<List<Niveau>> findByIntituleContains(String element);
 
 }

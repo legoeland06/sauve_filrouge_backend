@@ -3,8 +3,9 @@ package com.example.demo.restController;
 import java.util.List;
 import java.util.Optional;
 
+import com.example.demo.dao.AdresseRepository;
 import com.example.demo.entities.Adresse;
-import com.example.demo.services.IService;
+import com.example.demo.services.IAdresse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -24,7 +25,9 @@ import org.springframework.web.server.ResponseStatusException;
 public class AdresseRestController {
 
 	@Autowired
-	private IService<Adresse> adresseService;
+	private IAdresse<Adresse> adresseService;
+	@Autowired
+	private AdresseRepository adresseRepository;
 	
 	@PutMapping("/adresses/{id}")
 	public ResponseEntity<Adresse> modify(@PathVariable Long id, @RequestBody Adresse target) {
@@ -40,7 +43,6 @@ public class AdresseRestController {
 		return new ResponseEntity<Adresse>(adresseService.saveOrUpdate(addr), HttpStatus.OK);
 	}
 	
-	// http://localhost:8080/adresse
 	@GetMapping("/adresses")
 	public ResponseEntity<List<Adresse>> showAll() {
 		return new ResponseEntity<List<Adresse>>(adresseService.findAll(), HttpStatus.OK);
@@ -50,8 +52,18 @@ public class AdresseRestController {
 	public Optional<Adresse> findById(@PathVariable Long id) {
 		return adresseService.findById(id);
 	}
-	
-	
+	@GetMapping("/adresses/findByVille/{ville}")
+	public Optional<List<Adresse>> findByVilleContains(@PathVariable String ville) {
+		return adresseRepository.findByVilleContains(ville);
+	}
+	@GetMapping("/adresses/findByCp/{cp}")
+	public Optional<List<Adresse>> findByCp(@PathVariable String cp) {
+		return adresseRepository.findByCp(cp);
+	}
+	@GetMapping("/adresses/findByPays/{pays}")
+	public Optional<List<Adresse>> findByPays(@PathVariable String pays) {
+		return adresseRepository.findByPays(pays);
+	}
 	
 	@PostMapping("/adresses")
 	public ResponseEntity<Adresse> save(@RequestBody Adresse i) {

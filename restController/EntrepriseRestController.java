@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Optional;
 
 import com.example.demo.entities.Entreprise;
-import com.example.demo.entities.Entreprise;
 import com.example.demo.services.IService;
 
 import org.springframework.beans.factory.annotation.Autowired;

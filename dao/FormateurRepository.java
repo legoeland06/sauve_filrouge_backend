@@ -11,5 +11,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface FormateurRepository  extends JpaRepository<Formateur, Long>{
 
-	List<Formateur> findByNomContains(String element);
+	Optional<List<Formateur>> findByNomContains(String element);
 }

@@ -12,6 +12,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface LienTestRepository  extends JpaRepository<LienTest, Long>{
 
-	List<LienTest> findByLienContains(String element);
+	Optional<List<LienTest>> findByLienContains(String element);
 
 }

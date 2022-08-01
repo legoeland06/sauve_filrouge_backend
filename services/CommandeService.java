@@ -51,10 +51,12 @@ public class CommandeService implements IService<Commande> {
 	}
 
 	@Override
-	public List<Commande> findByNomContains(String element) {
+	public Optional<List<Commande>> findByNomContains(String element) {
 		// TODO Auto-generated method stub
-		return null;
+		return Optional.empty();
 	}
+
+	
 
 	
 }
