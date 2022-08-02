@@ -11,6 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -22,6 +23,9 @@ public class Formation {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	
+	@ManyToOne(cascade = CascadeType.MERGE)
+	private Categorie categorie;
 	
 	private String intitule;
 	
@@ -35,14 +39,13 @@ public class Formation {
 	
 	private String niveau;
 	
-	@OneToOne(cascade = { CascadeType.PERSIST, CascadeType.ALL })
+	@OneToOne(cascade = { CascadeType.MERGE, CascadeType.ALL })
 	private Adresse lieux;
 	
 	private String lienTest;
 	
-	@Basic(fetch=FetchType.LAZY, optional=false)
-	@ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.ALL })
-	private List<Formateur> formateurs;
+	@ManyToOne(cascade = { CascadeType.MERGE})
+	private Formateur formateur;
 	
 	public Formation(String intitule, String descriptif) {
 		super();
@@ -50,9 +53,10 @@ public class Formation {
 		this.descriptif = descriptif;
 	}
 	
-	public Formation(String intitule, String descriptif, int duree, Date dateDebut, double prix, String niveau,
-			Adresse lieux, String lienTest,List<Formateur> formateurs) {
+	public Formation(String intitule,Categorie categorie, String descriptif, int duree, Date dateDebut, double prix, String niveau,
+			Adresse lieux, String lienTest) {
 		super();
+		this.categorie = categorie;
 		this.intitule = intitule;
 		this.descriptif = descriptif;
 		this.duree = duree;
@@ -61,7 +65,6 @@ public class Formation {
 		this.niveau = niveau;
 		this.lieux = lieux;
 		this.lienTest = lienTest;
-		this.formateurs = formateurs;
 	}
 
 	public Formation() {
@@ -74,6 +77,15 @@ public class Formation {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	
+	public Categorie getCategorie() {
+		return categorie;
+	}
+
+	public void setCategorie(Categorie categorie) {
+		this.categorie = categorie;
 	}
 
 	public String getIntitule() {
@@ -140,19 +152,19 @@ public class Formation {
 		this.lienTest = lienTest;
 	}
 
-	public List<Formateur> getFormateurs() {
-		return formateurs;
+	public Formateur getFormateur() {
+		return formateur;
 	}
 
-	public void setFormateurs(List<Formateur> formateurs) {
-		this.formateurs = formateurs;
+	public void setFormateur(Formateur formateur) {
+		this.formateur = formateur;
 	}
 
 	@Override
 	public String toString() {
-		return "Formation [id=" + id + ", intitule=" + intitule + ", descriptif=" + descriptif + ", duree=" + duree
+		return "Formation [id=" + id + ", catégorie=" + categorie +", intitule=" + intitule + ", descriptif=" + descriptif + ", duree=" + duree
 				+ ", dateDebut=" + dateDebut + ", prix=" + prix + ", niveau=" + niveau + ", lieux=" + lieux
-				+ ", lienTest=" + lienTest + ", Formateurs= " + formateurs + "]";
+				+ ", lienTest=" + lienTest + ", Formateur= " + formateur + "]";
 	}
 	
 
