@@ -8,10 +8,9 @@ import com.example.demo.entities.Formation;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestParam;
 
 @Service(value="formationService")
-public class FormationsService implements IService<Formation> {
+public class FormationsService implements IFormations {
 
 	@Autowired
 	private FormationRepository formationRepository;
@@ -35,7 +34,7 @@ public class FormationsService implements IService<Formation> {
 		changedFormation.setLieux(o.getLieux());
 		changedFormation.setPrix(o.getPrix());
 		changedFormation.setNiveau(o.getNiveau());
-		changedFormation.setFormateurs(o.getFormateurs());
+		changedFormation.setFormateur(o.getFormateur());
 		changedFormation.setDateDebut(o.getDateDebut());
 		
 		return formationRepository.save(changedFormation);
@@ -64,6 +63,12 @@ public class FormationsService implements IService<Formation> {
 	public Optional<List<Formation>> findByNomContains(String element) {
 		// TODO Auto-generated method stub
 		return formationRepository.findByIntituleContains(element);
+	}
+
+	@Override
+	public Optional<List<Formation>> findByCategorieFormations(Long id) {
+		// TODO Auto-generated method stub
+		return formationRepository.findByCategorieId(id);
 	}
 	
 }
